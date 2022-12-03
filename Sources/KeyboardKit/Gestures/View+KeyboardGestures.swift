@@ -33,7 +33,7 @@ public extension View {
         isInScrollView: Bool = false,
         isPressed: Binding<Bool> = .constant(false)
     ) -> some View {
-        if action == .nextKeyboard {
+        if action == .nextKeyboard && KeyboardContext.isAppExtension {
             self
         } else {
             self.keyboardGestures(
