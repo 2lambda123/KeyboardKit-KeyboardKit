@@ -31,6 +31,11 @@ public class AutocompleteContext: ObservableObject {
     /// Whether or not autocomplete is enabled.
     @Published
     public var isAutocompleteEnabled = true
+    
+    /// Whether or not unknown suggestions are automatically
+    /// learned when they're applied.
+    @Published
+    public var isAutoLearnEnabled = true
 
     /// Whether or not suggestions are being fetched.
     @Published
@@ -39,7 +44,11 @@ public class AutocompleteContext: ObservableObject {
     /// The last received autocomplete error.
     @Published
     public var lastError: Error?
-    
+
+    /// The preferred suggestion count.
+    @Published
+    public var preferredSuggestionCount: Int = 3
+
     /// The last received autocomplete suggestions.
     @Published
     public var suggestions: [Autocomplete.Suggestion] = []
@@ -51,3 +60,4 @@ public class AutocompleteContext: ObservableObject {
         suggestions = []
     }
 }
+

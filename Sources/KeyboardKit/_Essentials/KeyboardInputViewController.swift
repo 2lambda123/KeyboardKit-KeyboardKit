@@ -170,19 +170,25 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
 
 
     // MARK: - Keyboard Properties
-    
+
     /// The default set of keyboard-specific services.
     public lazy var services: Keyboard.Services = {
-        let services = Keyboard.Services(state: state)
-        services.setup(for: self)
-        return services
+        let instance = Keyboard.Services(state: state)
+        instance.setup(for: self)
+        return instance
     }()
-    
+
+    /// The default set of keyboard-specific settings.
+    public lazy var settings: Keyboard.Settings = {
+        let instance = Keyboard.Settings()
+        return instance
+    }()
+
     /// The default set of keyboard-specific state.
     public lazy var state: Keyboard.State = {
-        let state = Keyboard.State()
-        state.setup(for: self)
-        return state
+        let instance = Keyboard.State()
+        instance.setup(for: self)
+        return instance
     }()
 
 
@@ -233,7 +239,11 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
     open func deleteBackward(times: Int) {
         textDocumentProxy.deleteBackward(times: times)
     }
-    
+
+    open func endSentence(withText text: String) {
+        textDocumentProxy.endSentence(withText: text)
+    }
+
     open func insertDiacritic(_ diacritic: Keyboard.Diacritic) {
         textDocumentProxy.insertDiacritic(diacritic)
     }
@@ -292,8 +302,16 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
     }
 
     /// Whether or not autocomple is enabled.
+    ///
+    /// This property will by default base its value on both
+    /// ``AutocompleteContext/isAutocompleteEnabled`` and on
+    /// ``KeyboardContext/prefersAutocomplete``, where these
+    /// must both be true for this to be true.
     open var isAutocompleteEnabled: Bool {
-        guard state.autocompleteContext.isAutocompleteEnabled else { return false }
+        guard
+            state.keyboardContext.prefersAutocomplete,
+            state.autocompleteContext.isAutocompleteEnabled
+        else { return false }
         return !textDocumentProxy.isReadingFullDocumentContext
     }
 
@@ -360,22 +378,6 @@ private extension KeyboardInputViewController {
         await MainActor.run {
             state.dictationContext.lastError = error
         }
-    }
-}
-
-public extension View {
-    
-    func keyboardState(
-        from controller: KeyboardInputViewController
-    ) -> some View {
-        self.keyboardState(controller.state)
-    }
-    
-    @available(*, deprecated, renamed: "keyboardState(from:)")
-    func withEnvironment(
-        fromController controller: KeyboardInputViewController
-    ) -> some View {
-        self.keyboardState(from: controller)
     }
 }
 #endif

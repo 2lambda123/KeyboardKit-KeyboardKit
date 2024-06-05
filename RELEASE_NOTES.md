@@ -11,6 +11,62 @@ These release notes only cover the current major version.
 
 
 
+## 8.7
+
+This version improves the overall autocomplete behavior.
+
+The local autocomplete provider now returns proper unknown statuses for the leading quotation suggestion. The standard action handler will automatically ask the autocomplete provider to learn applied unknown suggestions, if `isAutoLearnEnabled` is `true`.
+
+This way to learn unknown suggestions will hopefully solve many frustrations involved with autocomplete, where the provider will behave better over time. Please provide feedback if these adjustments don't behave properly, or as expected.
+
+Another change is that the `KeyboardInputViewController` will check more configurations before performing autocomplete. The keyboard context's `prefersAutocomplete` property will now also be used to make this decision. 
+
+Another change worth knowing, is that the `Autocomplete.ToolbarItem` view no longer adds quotations around unknown suggestions. That responsibility has been moved to the autocomplete provider. The view will just show the titles it receives.  
+
+Furthermore, this version adds brand new persistent settings types, adds a `KeyboardLocaleInfo` protocol that makes `KeyboardLocale` and `Locale` share many properties, and makes it possible to define which text to use when ending the current sentence. 
+
+### 🆕 New Settings Types
+ 
+* `AutocompleteSettings` is a new observable settings type.
+* `DictationSettings` is a new observable settings type.
+* `FeedbackSettings` is a new observable settings type.
+* `Keyboard.Settings` is a new settings type container.
+
+### ✨ Features
+
+* `Autocomplete.Suggestion` has new functions.
+* `AutocompleteContext` has a new `isAutoLearnEnabled` property.
+* `AutocompleteContext` has a new `preferredSuggestionCount` property.
+* `AutocompleteProvider` has new `ignoreWords(_:)` and suggestion functions.
+* `KeyboardBehavior` and its implementations have a new `endSentenceText` property.
+* `KeyboardAction.StandardProvider` can now automatically learn unknown suggestions.
+* `KeyboardController` has a new `endSentence(withText:)` function to end sentences.
+* `KeyboardInputViewController` has a new `settings` property with setting instances.
+* `KeyboardLocaleInfo` is a new protocol that is shared by KeyboardLocale and Locale.
+* `KeyboardSettings` has new ways to register a custom store and settings key prefix.
+* `UserDefaults` has a new `.keyboardSettings` value that can be used to persist data.
+
+### 💡 Adjustments
+
+* `Autocomplete.ToolbarItem` no longer adds quotations to unknown suggestions.
+* `KeyboardContex` `prefersAutocomplete` is now computed and no longer synced.
+* `KeyboardInputViewController` now checks `KeyboardContext.prefersAutocomplete`.
+* `KeyboardSettings` have been converted from a namespace to being a part of `Keyboard`.
+ 
+### 👑 KeyboardKit Pro
+
+* `Autocomplete.LocalProvider` will now return proper unknown state for suggestions.
+* `Dictation.ProKeyboardService` uses an action handler to open app and navigate back.
+* `KeyboardHostApplication` now implements `Identifiable` and has a new `name` property.
+* `KeyboardHostApplication` now defines even more applications and has a `url` property.
+* `KeyboardHostApplicationProvider` is a new protocol that is implemented by some types.
+
+### 🗑️ Deprecations
+
+* `Keyboard.ReturnKeyType` `prefersAutocomplete` has been deprecated, since the keyboard type should determine this.
+
+
+
 ## 8.6
 
 This version adds support for 5 new locales, support for diacritics, and makes it easier to identify the host application. It also improves many of the localized system keyboards that are provided by Pro.

@@ -17,17 +17,28 @@ extension KeyboardInputViewController {
     ) {
         self.children.forEach { $0.removeFromParent() }
         self.view.subviews.forEach { $0.removeFromSuperview() }
-        let view = view.keyboardState(from: self)
+        let view = view
+            .keyboardSettings(self.settings)
+            .keyboardState(self.state)
         let host = KeyboardHostingController(rootView: view)
         host.add(to: self)
     }
     
     /// Setup the controller when it has loaded.
     func setupController() {
+        setupContexts()
         setupInitialWidth()
         setupLocaleObservation()
     }
-    
+
+    /// Set up contexts based on the current settings values.
+    func setupContexts() {
+        state.autocompleteContext.sync(with: settings.autocompleteSettings)
+        state.dictationContext.sync(with: settings.dictationSettings)
+        state.feedbackContext.sync(with: settings.feedbackSettings)
+        state.keyboardContext.sync(with: settings.keyboardSettings)
+    }
+
     /// Set up an initial width to avoid SwiftUI layout bugs.
     func setupInitialWidth() {
         #if os(iOS) || os(tvOS)
@@ -44,7 +55,8 @@ extension KeyboardInputViewController {
             let locale = $0
             self.primaryLanguage = locale.identifier
             self.services.autocompleteProvider.locale = locale
-        }.store(in: &cancellables)
+        }
+        .store(in: &cancellables)
     }
 }
 #endif
