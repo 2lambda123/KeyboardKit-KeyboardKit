@@ -9,6 +9,7 @@
     )
 
     @PageColor(blue)
+
 }
 
 This article describes the KeyboardKit settings engine.
@@ -17,39 +18,33 @@ Great keyboard apps use the main app to show the current state of the keyboard, 
 
 Apps and keyboards can also navigate to System Settings to enable the keyboard extension, enable full access etc. Reading settings from the system is however strictly limited by iOS, due to privacy reasons.
 
-KeyboardKit provides tools to make this easier, such as ``Foundation/URL`` extensions and custom navigation links.
-
-
+KeyboardKit provides tools to make this easier, such as `Foundation/URL` extensions and custom navigation links.
 
 ## Keyboard settings
 
-KeyboardKit has an observable ``KeyboardSettings`` class that defines common keyboard settings, as well as ways to define which ``KeyboardSettings/store`` and ``KeyboardSettings/storeKeyPrefix`` to use when persisting settings within the library.
+KeyboardKit has an observable `KeyboardSettings` class that defines common keyboard settings, as well as ways to define which `KeyboardSettings/store` and `KeyboardSettings/storeKeyPrefix` to use when persisting settings within the library.
 
-Other namespaces have their own settings types, like ``AutocompleteSettings``, ``DictationSettings``, ``FeedbackSettings``, etc. These types will automatically persist changes and can sync changes between the app and keyboard (see further down).
+Other namespaces have their own settings types, like `AutocompleteSettings`, `DictationSettings`, `FeedbackSettings`, etc. These types will automatically persist changes and can sync changes between the app and keyboard (see further down).
 
-The ``KeyboardInputViewController`` has a ``KeyboardInputViewController/settings`` property for shared settings and will automatically sync its ``KeyboardInputViewController/state`` with ``KeyboardInputViewController/settings`` when the keyboard is launched, and when any settings changes are made.
-
-
+The `KeyboardInputViewController` has a `KeyboardInputViewController/settings` property for shared settings and will automatically sync its `KeyboardInputViewController/state` with `KeyboardInputViewController/settings` when the keyboard is launched, and when any settings changes are made.
 
 ## How to sync settings between the app and the keyboard
 
-You can use the ``KeyboardSettings/registerKeyboardSettingsStore(_:keyPrefix:)`` function to register a custom settings store, for instance to sync user settings between the main app and the keyboard using an App Group:
+You can use the `KeyboardSettings/registerKeyboardSettingsStore(_:keyPrefix:)` function to register a custom settings store, for instance to sync user settings between the main app and the keyboard using an App Group:
 
 ```swift
 KeyboardSettings.registerKeyboardSettingsStore(.init(suiteName: "group.com.myapp"))
 ```
 
-You can access this shared store with the static ``KeyboardSettings/store`` property, or use the computed user defaults ``Foundation/UserDefaults/keyboardSettings`` property.
+You can access this shared store with the static `KeyboardSettings/store` property, or use the computed user defaults `Foundation/UserDefaults/keyboardSettings` property.
 
 Apps will always write data to an App Group, in a way that is instantly available to the keyboard. The keyboard must however have Full Access for changes to be immediately synced to the app. When Full Access is disabled, your keyboard will sync changes less reliably.
 
-> Important: Since `@AppStorage` properties will use the store instance that is available when they are first called, you must register a custom store as soon as possible, before setting up KeyboardKit or reading these values. 
-
-
+> Important: Since `@AppStorage` properties will use the store instance that is available when they are first called, you must register a custom store as soon as possible, before setting up KeyboardKit or reading these values.
 
 ## How to open System Settings
 
-KeyboardKit defines a ``Foundation/URL/keyboardSettings`` URL that can be used to open your app's keyboard settings in System Settings. You can use a standard SwiftUI link to open this URL from your app or your keyboard:
+KeyboardKit defines a `Foundation/URL/keyboardSettings` URL that can be used to open your app's keyboard settings in System Settings. You can use a standard SwiftUI link to open this URL from your app or your keyboard:
 
 ```swift
 if let url = URL.keyboardSettings {
@@ -57,21 +52,19 @@ if let url = URL.keyboardSettings {
 }
 ```
 
-You can also use the convenient ``Keyboard/SettingsLink`` link to link to System Settings. It will default use the ``Foundation/URL/keyboardSettings`` URL with an English text, but you can customize both the text and the entire content view:
+You can also use the convenient `Keyboard/SettingsLink` link to link to System Settings. It will default use the `Foundation/URL/keyboardSettings` URL with an English text, but you can customize both the text and the entire content view:
 
 @Row {
-    @Column {}
-    @Column(size: 2) {
-        ![KeyboardStatus.Label](keyboardstatuslabel)
-    }
-    @Column {}
+@Column {}
+@Column(size: 2) {
+![KeyboardStatus.Label](keyboardstatuslabel)
+}
+@Column {}
 }
 
-To trigger a URL from the keyboard, you can trigger a ``KeyboardAction/url(_:id:)`` action to make the ``KeyboardActionHandler`` open the URL.
+To trigger a URL from the keyboard, you can trigger a `KeyboardAction/url(_:id:)` action to make the `KeyboardActionHandler` open the URL.
 
 > Note: If your app randomly navigates to the System Settings root instead of your app, try adding an empty settings bundle to your app.
-
-
 
 ## How to access System Settings
 
@@ -79,17 +72,15 @@ A common feature request is to be able to access various settings from System Se
 
 This is not possible, at least not with the public APIs. This is most probably due to privacy concerns, and unfortunately means that your app must provide its own keyboard settings.
 
-
-
 ## Views
 
-The ``Keyboard`` namespace has settings-specific views, that can be used to link to System Settings:
+The `Keyboard` namespace has settings-specific views, that can be used to link to System Settings:
 
 @TabNavigator {
-    
+
     @Tab("Keyboard.SettingsLink") {
         A keyboard ``Keyboard/SettingsLink`` can be used to link to System Settings, or any other custom URL:
-        
+
         @Row {
             @Column {}
             @Column(size: 2) {
@@ -97,9 +88,10 @@ The ``Keyboard`` namespace has settings-specific views, that can be used to link
             }
             @Column {}
         }
-        
+
         This view can use any content view, and is used by the <doc:Status-Article> views to link users to System Settings while displaying keyboard statuses.
     }
+
 }
 
 See the <doc:Styling-Article> article for more information about KeyboardKit view styling.
