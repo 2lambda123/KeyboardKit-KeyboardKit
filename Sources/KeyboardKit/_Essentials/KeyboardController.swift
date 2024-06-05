@@ -32,7 +32,7 @@ public protocol KeyboardController: AnyObject {
 
     /// Insert the provided diacritic.
     func insertDiacritic(_ diacritic: Keyboard.Diacritic)
-    
+
     /// Insert the provided text.
     func insertText(_ text: String)
 

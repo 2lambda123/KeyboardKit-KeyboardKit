@@ -9,10 +9,10 @@
 import SwiftUI
 
 public extension Autocomplete {
-    
+
     @available(*, deprecated, message: "Just use Autocomplete.ToolbarItem.")
     struct ToolbarItemTitle: View {
-        
+
         public init(
             suggestion: Autocomplete.Suggestion,
             locale: Locale = .current,
@@ -22,22 +22,22 @@ public extension Autocomplete {
             self.locale = locale
             self.initStyle = style
         }
-        
+
         private let suggestion: Autocomplete.Suggestion
         private let locale: Locale
-        
+
         /// Deprecated: Remove this in 9.0.
         private let initStyle: Autocomplete.ToolbarItemStyle?
-        
+
         @Environment(\.autocompleteToolbarStyle)
         private var envStyle
-        
+
         /// Deprecated: Replace this with initStyle in 9.0.
         private var style: Autocomplete.ToolbarStyle {
             guard let initStyle else { return envStyle }
             return .init(item: initStyle)
         }
-        
+
         public var body: some View {
             Text(suggestion.title)
                 .lineLimit(1)

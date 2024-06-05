@@ -10,7 +10,7 @@ import KeyboardKit
 import XCTest
 
 class KeyboardLocale_FlagTests: XCTestCase {
-    
+
     func testFlagIsValidForAllCases() {
         let map = KeyboardLocale.all.map { ($0, $0.flag) }
         let result = Dictionary(uniqueKeysWithValues: map)
@@ -90,7 +90,7 @@ class KeyboardLocale_FlagTests: XCTestCase {
             XCTAssertEqual(result[$0], expected[$0])
         }
     }
-    
+
     func testPrintFlagGrid() throws {
         try XCTSkipIf(true)
         var count = 0
@@ -110,7 +110,7 @@ class KeyboardLocale_FlagTests: XCTestCase {
             printLine(text)
         }
     }
-    
+
     func testPrintFlagNameList() throws {
         try XCTSkipIf(true)
         print("")
@@ -119,7 +119,7 @@ class KeyboardLocale_FlagTests: XCTestCase {
             printLine("\(locale.flag) \(locale.locale.localizedName(in: KeyboardLocale.english.locale))")
         }
     }
-    
+
     func testPrintFlagText() throws {
         try XCTSkipIf(true)
         print("")
@@ -129,7 +129,7 @@ class KeyboardLocale_FlagTests: XCTestCase {
             .joined(separator: " ")
         printLine(text)
     }
-    
+
     func testPrintNameText() throws {
         try XCTSkipIf(true)
         print("")
@@ -139,7 +139,7 @@ class KeyboardLocale_FlagTests: XCTestCase {
             .joined(separator: ", ")
         printLine(text)
     }
-    
+
     func printLine(_ string: String) {
         print("*** \(string) <br />")
     }

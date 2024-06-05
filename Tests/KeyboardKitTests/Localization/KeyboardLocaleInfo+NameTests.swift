@@ -31,7 +31,7 @@ class KeyboardLocaleInfo_NameTests: XCTestCase {
         XCTAssertEqual(localizedName(of: "sv"), "svenska")
     }
 
-    
+
     func testLocalizedNameIsValidForAllKeyboardLocales() {
         let map = KeyboardLocale.allCases.map { ($0, $0.locale.localizedName) }
         let result = Dictionary(uniqueKeysWithValues: map)

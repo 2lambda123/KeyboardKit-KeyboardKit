@@ -19,25 +19,25 @@ public extension Keyboard {
     /// You can adjust any state value at any time to adjust
     /// the global behavior of the keyboard.
     class State {
-        
+
         /// The autocomplete context to use.
         public lazy var autocompleteContext = AutocompleteContext()
-        
+
         /// The callout context to use.
         public lazy var calloutContext = CalloutContext(
             actionContext: .disabled,
             inputContext: .disabled)
-        
+
         /// The dictation configuration to use.
         public lazy var dictationConfig = Dictation.KeyboardConfiguration(
             context: dictationContext)
-        
+
         /// The dictation context to use.
         public lazy var dictationContext = DictationContext()
-        
+
         /// The feedback context to use.
         public lazy var feedbackContext = FeedbackContext()
-        
+
         /// The keyboard context to use.
         public lazy var keyboardContext = KeyboardContext()
     }
@@ -45,7 +45,7 @@ public extension Keyboard {
 
 #if os(iOS) || os(tvOS) || os(visionOS)
 public extension Keyboard.State {
-    
+
     // Setup the state instance for the provided controller.
     func setup(for controller: KeyboardInputViewController) {
         let isPhone = UIDevice.current.userInterfaceIdiom == .phone
@@ -59,7 +59,7 @@ public extension Keyboard.State {
 #endif
 
 public extension View {
-    
+
     // Inject all observable state into the view hierarchy.
     func keyboardState(_ state: Keyboard.State) -> some View {
         self.environmentObject(state.autocompleteContext)

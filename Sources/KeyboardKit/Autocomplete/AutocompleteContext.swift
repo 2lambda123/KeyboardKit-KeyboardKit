@@ -19,19 +19,19 @@ import Combine
 /// KeyboardKit will automatically setup an instance of this
 /// class in ``KeyboardInputViewController/state``, then use
 /// it as global state and inject it as an environment value
-/// into the view hierarchy. 
+/// into the view hierarchy.
 public class AutocompleteContext: ObservableObject {
-    
+
     public init() {}
-    
+
     /// Whether or not autocorrect is enabled.
     @Published
     public var isAutocorrectEnabled = true
-    
+
     /// Whether or not autocomplete is enabled.
     @Published
     public var isAutocompleteEnabled = true
-    
+
     /// Whether or not unknown suggestions are automatically
     /// learned when they're applied.
     @Published
@@ -60,4 +60,3 @@ public class AutocompleteContext: ObservableObject {
         suggestions = []
     }
 }
-

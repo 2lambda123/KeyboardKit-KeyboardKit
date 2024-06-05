@@ -21,7 +21,7 @@ class KeyboardLocale_AllTests: XCTestCase {
             XCTAssertFalse($0.locale.isRightToLeft)
         }
     }
-    
+
     func testAllRtlOnlyContainsRtlLocales() {
         KeyboardLocale.allRtl.forEach {
             XCTAssertFalse($0.locale.isLeftToRight)

@@ -34,7 +34,7 @@ import Foundation
 ///
 /// See <doc:Autocomplete-Article> for more information.
 public protocol AutocompleteProvider: AnyObject {
-    
+
     /// The currently applied locale.
     var locale: Locale { get set }
 
@@ -43,8 +43,8 @@ public protocol AutocompleteProvider: AnyObject {
     func autocompleteSuggestions(
         for text: String
     ) async throws -> [Autocomplete.Suggestion]
-    
-    
+
+
     /// Whether or not the provider can ignore words.
     var canIgnoreWords: Bool { get }
 
@@ -78,27 +78,27 @@ public protocol AutocompleteProvider: AnyObject {
 }
 
 public extension AutocompleteProvider {
-    
+
     /// Make the provider ignore a certain suggestion.
     func ignore(_ suggestion: Autocomplete.Suggestion) {
         ignoreWord(suggestion.text)
     }
-    
+
     /// Make the provider ignore a collection of words.
     func ignoreWords(_ words: [String]) {
         words.forEach(ignoreWord)
     }
-    
+
     /// Make the provider learn a certain suggestion.
     func learn(_ suggestion: Autocomplete.Suggestion) {
         learnWord(suggestion.text)
     }
-    
+
     /// Remove a certain ignored suggested from the provider.
     func removeIgnoredSuggestion(_ suggestion: Autocomplete.Suggestion) {
         removeIgnoredWord(suggestion.text)
     }
-    
+
     /// Make the provider unlearn a certain suggestion.
     func unlearn(_ suggestion: Autocomplete.Suggestion) {
         unlearnWord(suggestion.text)

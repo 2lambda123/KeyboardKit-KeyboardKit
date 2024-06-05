@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 public extension KeyboardLocale {
-    
+
     /// The corresponding flag emoji for the locale.
     var flag: String {
         switch self {
@@ -24,7 +24,7 @@ public extension KeyboardLocale {
         case .croatian: "🇭🇷"
         case .czech: "🇨🇿"
         case .danish: "🇩🇰"
-            
+
         case .dutch: "🇳🇱"
         case .dutch_belgium: "🇧🇪"
         case .english: "🇺🇸"
@@ -35,7 +35,7 @@ public extension KeyboardLocale {
         case .filipino: "🇵🇭"
         case .finnish: "🇫🇮"
         case .french: "🇫🇷"
-            
+
         case .french_canada: "🇨🇦"
         case .french_belgium: "🇧🇪"
         case .french_switzerland: "🇨🇭"
@@ -46,7 +46,7 @@ public extension KeyboardLocale {
         case .greek: "🇬🇷"
         case .hawaiian: "🇺🇸"
         case .hebrew: "🇮🇱"
-            
+
         case .hungarian: "🇭🇺"
         case .icelandic: "🇮🇸"
         case .inari_sami: "🏳️"
@@ -57,7 +57,7 @@ public extension KeyboardLocale {
         case .kurdish_sorani: "🇹🇯"
         case .kurdish_sorani_arabic: "🇹🇯"
         case .kurdish_sorani_pc: "🇹🇯"
-            
+
         case .latvian: "🇱🇻"
         case .lithuanian: "🇱🇹"
         case .macedonian: "🇲🇰"
@@ -68,7 +68,7 @@ public extension KeyboardLocale {
         case .norwegian: "🇳🇴"
         case .norwegian_nynorsk: "🇳🇴"
         case .persian: "🇮🇷"
-            
+
         case .polish: "🇵🇱"
         case .portuguese: "🇵🇹"
         case .portuguese_brazil: "🇧🇷"
@@ -79,7 +79,7 @@ public extension KeyboardLocale {
         case .slovenian: "🇸🇮"
         case .slovak: "🇸🇰"
         case .spanish: "🇪🇸"
-            
+
         case .spanish_latinAmerica: "🇦🇷"
         case .spanish_mexico: "🇲🇽"
         case .swedish: "🇸🇪"

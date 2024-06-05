@@ -9,13 +9,13 @@
 import SwiftUI
 
 public extension Autocomplete {
-    
+
     /// This view mimics a native autocomplete toolbar item.
     ///
     /// You can style this component with the style modifier
     /// ``autocompleteToolbarItemStyle(_:)``.
     struct ToolbarItem: View {
-        
+
         /// Create an autocomplete toolbar item.
         ///
         /// - Parameters:
@@ -29,13 +29,13 @@ public extension Autocomplete {
             self.locale = locale
             self.initStyle = nil
         }
-        
+
         private let suggestion: Suggestion
         private let locale: Locale
-        
+
         @Environment(\.autocompleteToolbarItemStyle)
         private var envStyle
-        
+
         public var body: some View {
             VStack(spacing: 0) {
                 title
@@ -48,9 +48,9 @@ public extension Autocomplete {
             .cornerRadius(style.backgroundCornerRadius)
             .autocompleteToolbarItemStyle(style)    // Deprecated: Remove in 9.0
         }
-        
+
         // MARK: - Deprecated
-        
+
         @available(*, deprecated, message: "Use .autocompleteToolbarItemStyle to apply the style instead.")
         public init(
             suggestion: Autocomplete.Suggestion,
@@ -61,7 +61,7 @@ public extension Autocomplete {
             self.locale = locale
             self.initStyle = style
         }
-        
+
         private typealias Style = Autocomplete.ToolbarItemStyle
         private let initStyle: Style?
         private var style: Style { initStyle ?? envStyle }
@@ -69,7 +69,7 @@ public extension Autocomplete {
 }
 
 private extension Autocomplete.ToolbarItem {
-    
+
     var title: some View {
         Text(suggestion.title)
             .lineLimit(1)
@@ -77,7 +77,7 @@ private extension Autocomplete.ToolbarItem {
             .foregroundColor(style.titleColor)
             .frame(maxWidth: .infinity)
     }
-    
+
     @ViewBuilder
     var subtitle: some View {
         if let subtitle = suggestion.subtitle {
@@ -90,12 +90,12 @@ private extension Autocomplete.ToolbarItem {
 }
 
 #Preview {
-    
+
     let suggestions: [Autocomplete.Suggestion] = [
         .init(text: "Foo", isUnknown: true),
         .init(text: "Bar", isAutocorrect: true),
         .init(text: "", title: "Baz", subtitle: "Recommended")]
-    
+
     return HStack {
         HStack {
             ForEach(suggestions, id: \.text) {

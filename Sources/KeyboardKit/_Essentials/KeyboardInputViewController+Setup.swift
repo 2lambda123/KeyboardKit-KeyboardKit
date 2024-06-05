@@ -10,7 +10,7 @@
 import SwiftUI
 
 extension KeyboardInputViewController {
-    
+
     /// Setup KeyboardKit with a custom root view.
     func setup<Content: View>(
         withRootView view: Content
@@ -23,7 +23,7 @@ extension KeyboardInputViewController {
         let host = KeyboardHostingController(rootView: view)
         host.add(to: self)
     }
-    
+
     /// Setup the controller when it has loaded.
     func setupController() {
         setupContexts()

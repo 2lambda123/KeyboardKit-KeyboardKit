@@ -46,7 +46,7 @@ public extension Keyboard {
 }
 
 public extension View {
-    
+
     // Inject observable settings into the view hierarchy.
     func keyboardSettings(_ settings: Keyboard.Settings) -> some View {
         self.environmentObject(settings.autocompleteSettings)

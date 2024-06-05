@@ -9,27 +9,27 @@
 import Foundation
 
 public extension Autocomplete {
- 
+
     /**
      This struct represents a suggestion that is returned by
      an ``AutocompleteProvider``.
-     
+
      Autocomplete suggestions can be standard suggestions or
      autocorrecting ones that are automatically applied when
      a user taps a word delimiter.
-     
+
      Autocorrecting suggestions are typically presented with
      a white background, but this can be customized with the
      ``Autocomplete/ToolbarItemStyle``, when you present the
      suggestion in an ``AutocompleteToolbar``.
-     
+
      The currently typed word is natively shown as a leading
      suggestion, wrapped in a locale-specific quotation. The
      ``Autocomplete/Suggestion/isUnknown`` is `true` when it
      wasn't found by the autocomplete engine.
      */
     struct Suggestion {
-        
+
         /// Create an autocomplete suggestion.
         ///
         /// - Parameters:
@@ -54,29 +54,29 @@ public extension Autocomplete {
             self.subtitle = subtitle
             self.additionalInfo = additionalInfo
         }
-        
+
         /// The text that should be sent to the proxy.
         public var text: String
-        
+
         /// The text that should be displayed.
         public var title: String
-        
+
         /// Whether or the suggestion is autocorrecting.
         public var isAutocorrect: Bool
-        
+
         /// Whether or the suggestion is unknown.
         public var isUnknown: Bool
-        
+
         /// An optional subtitle that can complete the title.
         public var subtitle: String?
-        
+
         /// An optional info dictionary.
         public var additionalInfo: [String: Any]
     }
 }
 
 public extension Collection where Element == Autocomplete.Suggestion {
-    
+
     func contains(_ word: String) -> Bool {
         contains { $0.text.caseInsensitiveCompare(word) == .orderedSame }
     }

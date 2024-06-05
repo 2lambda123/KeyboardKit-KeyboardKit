@@ -21,33 +21,33 @@ import Foundation
 ///
 /// See the <doc:Essentials> for more information.
 public protocol KeyboardBehavior {
-    
+
     typealias Gesture = Gestures.KeyboardGesture
-    
+
     /// The range that backspace should delete.
     var backspaceRange: Keyboard.BackspaceRange { get }
-    
+
     /// The  symbolic that  end the sentence after a gesture action should  inject.
     var endSentenceText: String { get set }
-    
+
     /// The preferred keyboard type after an action gesture.
     func preferredKeyboardType(
         after gesture: Gesture,
         on action: KeyboardAction
     ) -> Keyboard.KeyboardType
-    
+
     /// Whether to end the sentence after a gesture action.
     func shouldEndSentence(
         after gesture: Gesture,
         on action: KeyboardAction
     ) -> Bool
-    
+
     /// Whether to switch to capslock after a gesture action.
     func shouldSwitchToCapsLock(
         after gesture: Gesture,
         on action: KeyboardAction
     ) -> Bool
-    
+
     /// Whether to switch to the preferred keyboard type after
     /// a gesture action.
     func shouldSwitchToPreferredKeyboardType(

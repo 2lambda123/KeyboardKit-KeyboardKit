@@ -113,7 +113,7 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
 
 
     // MARK: - Setup
-    
+
     @available(*, deprecated, message: "Use the setupPro licenseError parameter instead.")
     public var setupProError: Error?
 
@@ -129,7 +129,7 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
     ) {
         setup(withRootView: Keyboard.RootView(view))
     }
-    
+
     /// Setup KeyboardKit with a custom keyboard view.
     ///
     /// > Warning: Make sure to read the class documentation
@@ -152,7 +152,7 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
 
 
     // MARK: - Proxy Properties
-    
+
     /// The original text document proxy.
     open var originalTextDocumentProxy: UITextDocumentProxy {
         super.textDocumentProxy
@@ -210,14 +210,14 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
         state.keyboardContext.syncTextDocumentProxy(with: self)
         state.keyboardContext.syncTextInputProxy(with: self)
     }
-    
+
     open override func textDidChange(_ textInput: UITextInput?) {
         super.textDidChange(textInput)
         DispatchQueue.main.async { [weak self] in
             self?.textDidChangeAsync(textInput)
         }
     }
-    
+
     /// This function will be called with an async delay, to
     /// give the text document proxy time to update itself.
     open func textDidChangeAsync(_ textInput: UITextInput?) {
@@ -227,7 +227,7 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
 
 
     // MARK: - KeyboardController
-    
+
     open func adjustTextPosition(by offset: Int) {
         textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
     }
@@ -279,7 +279,7 @@ open class KeyboardInputViewController: UIInputViewController, KeyboardControlle
     open var isContextSyncEnabled: Bool {
         !textDocumentProxy.isReadingFullDocumentContext
     }
-    
+
     /// Perform a keyboard context sync.
     ///
     /// This is performed to keep the ``state`` in sync, and
@@ -366,14 +366,14 @@ private extension KeyboardInputViewController {
             self?.state.autocompleteContext.lastError = error
         }
     }
-    
+
     /// Update the autocomplete context with new suggestions.
     func updateAutocompleteContext(with result: [Autocomplete.Suggestion]) {
         DispatchQueue.main.async { [weak self] in
             self?.state.autocompleteContext.suggestions = result
         }
     }
-    
+
     func updateLastDictationError(_ error: Error) async {
         await MainActor.run {
             state.dictationContext.lastError = error

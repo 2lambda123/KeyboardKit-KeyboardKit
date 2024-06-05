@@ -125,10 +125,10 @@ To share data between your app and keyboard extension, you must setup a shared a
 
 @Row {
 @Column {
-![Set up an App Group for the app](dictation-appgroup-app)  
+![Set up an App Group for the app](dictation-appgroup-app)
  }
 @Column {
-![Set up an App Group for the keyboard](dictation-appgroup-keyboard)  
+![Set up an App Group for the keyboard](dictation-appgroup-keyboard)
  }
 }
 

@@ -14,7 +14,7 @@ import Foundation
 /// Since some of the abstractions return invalid result for
 /// e.g. macOS and watchOS, make sure to replace them later.
 extension KeyboardContext {
-    
+
     func insertAutocompleteSuggestion(
         _ suggestion: Autocomplete.Suggestion,
         tryInsertSpace: Bool = true
@@ -26,7 +26,7 @@ extension KeyboardContext {
         )
         #endif
     }
-    
+
     var isCursorAtNewWord: Bool {
         #if os(iOS) || os(tvOS) || os(visionOS)
         textDocumentProxy.isCursorAtNewWord
@@ -34,7 +34,7 @@ extension KeyboardContext {
         return false
         #endif
     }
-    
+
     func preferredQuotationReplacement(
         whenInserting text: String,
         for locale: Locale
@@ -45,7 +45,7 @@ extension KeyboardContext {
         return nil
         #endif
     }
-    
+
     func spaceDragOffset(for rawOffset: Int) -> Int? {
         #if os(iOS) || os(tvOS) || os(visionOS)
         textDocumentProxy.spaceDragOffset(for: rawOffset)
@@ -53,13 +53,13 @@ extension KeyboardContext {
         return nil
         #endif
     }
-    
+
     func tryReinsertAutocompleteRemovedSpace() {
         #if os(iOS) || os(tvOS) || os(visionOS)
         textDocumentProxy.tryReinsertAutocompleteRemovedSpace()
         #endif
     }
-    
+
     func tryRemoveAutocompleteInsertedSpace() {
         #if os(iOS) || os(tvOS) || os(visionOS)
         textDocumentProxy.tryRemoveAutocompleteInsertedSpace()

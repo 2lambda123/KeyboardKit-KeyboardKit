@@ -21,7 +21,7 @@ class DemoActionHandler: KeyboardAction.StandardHandler {
 
 
     // MARK: - Overrides
-    
+
     override func action(
         for gesture: Gestures.KeyboardGesture,
         on action: KeyboardAction
@@ -33,10 +33,10 @@ class DemoActionHandler: KeyboardAction.StandardHandler {
         default: return standard
         }
     }
-    
-    
+
+
     // MARK: - Custom actions
-    
+
     func longPressAction(
         for action: KeyboardAction
     ) -> KeyboardAction.GestureAction? {
@@ -45,7 +45,7 @@ class DemoActionHandler: KeyboardAction.StandardHandler {
         default: nil
         }
     }
-    
+
     func releaseAction(
         for action: KeyboardAction
     ) -> KeyboardAction.GestureAction? {
@@ -54,21 +54,21 @@ class DemoActionHandler: KeyboardAction.StandardHandler {
         default: nil
         }
     }
-    
-    
+
+
     // MARK: - Functions
-    
+
     func alert(_ message: String) {
         print("Implement alert functionality if you want.")
     }
-    
+
     func copyImage(named imageName: String) {
         guard let image = UIImage(named: imageName) else { return }
         guard keyboardContext.hasFullAccess else { return alert("You must enable full access to copy images.") }
         guard image.copyToPasteboard() else { return alert("The image could not be copied.") }
         alert("Copied to pasteboard!")
     }
-    
+
     func saveImage(named imageName: String) {
         guard let image = UIImage(named: imageName) else { return }
         guard keyboardContext.hasFullAccess else { return alert("You must enable full access to save images.") }
@@ -78,7 +78,7 @@ class DemoActionHandler: KeyboardAction.StandardHandler {
 }
 
 private extension DemoActionHandler {
-    
+
     func handleImageDidSave(withError error: Error?) {
         if error == nil { alert("Saved!") }
         else { alert("Failed!") }
@@ -86,7 +86,7 @@ private extension DemoActionHandler {
 }
 
 private extension UIImage {
-    
+
     func copyToPasteboard(_ pasteboard: UIPasteboard = .general) -> Bool {
         guard let data = pngData() else { return false }
         pasteboard.setData(data, forPasteboardType: "public.png")
@@ -95,7 +95,7 @@ private extension UIImage {
 }
 
 private extension UIImage {
-    
+
     func saveToPhotos(completion: @escaping (Error?) -> Void) {
         ImageService.default.saveImageToPhotos(self, completion: completion)
     }
@@ -104,18 +104,18 @@ private extension UIImage {
 
 /// This class is used as target by the extension above.
 private class ImageService: NSObject {
-    
+
     public typealias Completion = (Error?) -> Void
 
     public static private(set) var `default` = ImageService()
-    
+
     private var completions = [Completion]()
-    
+
     public func saveImageToPhotos(_ image: UIImage, completion: @escaping (Error?) -> Void) {
         completions.append(completion)
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveImageToPhotosDidComplete), nil)
     }
-    
+
     @objc func saveImageToPhotosDidComplete(_ image: UIImage, error: NSError?, contextInfo: UnsafeRawPointer) {
         guard completions.count > 0 else { return }
         completions.removeFirst()(error)

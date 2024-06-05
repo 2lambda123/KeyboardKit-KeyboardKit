@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension Keyboard {
-    
+
     /// This link can navigate to the app in System Settings.
     ///
     /// The link's behavior can be a bit inconsistent. While
@@ -40,11 +40,11 @@ public extension Keyboard {
             self.addNavigationArrow = addNavigationArrow
             self.label = label
         }
-        
+
         private let url: URL?
         private let addNavigationArrow: Bool
         private let label: () -> Content
-        
+
         public var body: some View {
             if let url {
                 SwiftUI.Link(destination: url) {
@@ -71,7 +71,7 @@ public extension Keyboard.SettingsLink where Content == Label<Text, Image> {
     ///   - title: The button text, by default `System Settings`.
     ///   - icon: The button icon, by default ``SwiftUI/Image/keyboardSettings``.
     ///   - url: The url to navigate to, by default ``Foundation/URL/keyboardSettings``.
-    ///   - addNavigationArrow: Whether to add a trailing disclosure arrow, by default `false`.   
+    ///   - addNavigationArrow: Whether to add a trailing disclosure arrow, by default `false`.
     init(
         title: String = "System Settings",
         icon: Image = .keyboardSettings,

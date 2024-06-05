@@ -9,12 +9,12 @@
 import Foundation
 
 public extension KeyboardLocale {
-    
+
     /// Get all LTR locales.
     static var allLtr: [KeyboardLocale] {
         allCases.filter { $0.locale.isLeftToRight }
     }
-    
+
     /// Get all RTL locales.
     static var allRtl: [KeyboardLocale] {
         allCases.filter { $0.locale.isRightToLeft }

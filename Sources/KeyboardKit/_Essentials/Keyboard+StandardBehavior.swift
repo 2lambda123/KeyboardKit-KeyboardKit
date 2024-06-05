@@ -9,7 +9,7 @@
 import Foundation
 
 extension Keyboard {
-    
+
     /// This class defines the standard keyboard behavior of
     /// a standard western keyboard, with some locale tweaks.
     ///
@@ -23,7 +23,7 @@ extension Keyboard {
     /// You can inherit this class to get base functionality,
     /// then override any open parts that you want to change.
     open class StandardBehavior: KeyboardBehavior {
-        
+
         /// Create a standard keyboard behavior instance.
         ///
         /// - Parameters:
@@ -45,11 +45,11 @@ extension Keyboard {
             self.endSentenceThreshold = endSentenceThreshold
             self.repeatGestureTimer = repeatGestureTimer
         }
-        
-        
+
+
         /// The keyboard context to use.
         public let keyboardContext: KeyboardContext
-        
+
         /// The douple tap threshold to use.
         public let doubleTapThreshold: TimeInterval
 
@@ -58,26 +58,26 @@ extension Keyboard {
 
         /// The end sentence auto-close threshold to use.
         public let endSentenceThreshold: TimeInterval
-        
+
         /// The repease gesture timer to use.
         public let repeatGestureTimer: Gestures.RepeatTimer
-        
-        
+
+
         /// An internal state to keep track of shift checks.
         public internal(set) var lastShiftCheck = Date()
-        
+
         /// An internal state to keep track of the last space tap.
         public internal(set) var lastSpaceTap = Date()
-        
-        
+
+
         // MARK: - KeyboardBehavior
-        
+
         /// The range that backspace should delete.
         open var backspaceRange: Keyboard.BackspaceRange {
             let duration = repeatGestureTimer.duration ?? 0
             return duration > 3 ? .word : .character
         }
-        
+
         /// The preferred keyboard type after an action gesture.
         open func preferredKeyboardType(
             after gesture: Gesture,
@@ -91,7 +91,7 @@ extension Keyboard {
             default: return should ? keyboardContext.preferredKeyboardType : keyboardContext.keyboardType
             }
         }
-        
+
         /// Whether to end the sentence after a gesture action.
         open func shouldEndSentence(
             after gesture: Gesture,
@@ -111,7 +111,7 @@ extension Keyboard {
             return false
 #endif
         }
-        
+
         /// Whether to switch to capslock after a gesture action.
         open func shouldSwitchToCapsLock(
             after gesture: Gesture,
@@ -122,7 +122,7 @@ extension Keyboard {
             default: false
             }
         }
-        
+
         /// Whether to switch to the preferred keyboard type after
         /// a gesture action.
         open func shouldSwitchToPreferredKeyboardType(
@@ -137,7 +137,7 @@ extension Keyboard {
             default: gesture == .release && isPreferredKeyboardDifferent
             }
         }
-        
+
         /// Whether to switch to a preferred keyboard type after
         /// the text document proxy text changes.
         public func shouldSwitchToPreferredKeyboardTypeAfterTextDidChange() -> Bool {
@@ -147,14 +147,14 @@ extension Keyboard {
 }
 
 public extension Keyboard.StandardBehavior {
-    
+
     /// Is the preferred keyboard different from the current.
     var isPreferredKeyboardDifferent: Bool {
         let current = keyboardContext.keyboardType
         let preferred = keyboardContext.preferredKeyboardType
         return current != preferred
     }
-    
+
     /// Is the type currently registering a double shift tap.
     var isDoubleShiftTap: Bool {
         guard keyboardContext.keyboardType.isAlphabetic else { return false }
@@ -167,7 +167,7 @@ public extension Keyboard.StandardBehavior {
 }
 
 private extension KeyboardAction {
-    
+
     func isAlternateQuotationDelimiter(for context: KeyboardContext) -> Bool {
         switch self {
         case .character(let char): char.isAlternateQuotationDelimiter(for: context)
@@ -177,7 +177,7 @@ private extension KeyboardAction {
 }
 
 private extension String {
-    
+
     func isAlternateQuotationDelimiter(for context: KeyboardContext) -> Bool {
         let locale = context.locale
         return self == locale.alternateQuotationBeginDelimiter || self == locale.alternateQuotationEndDelimiter
@@ -185,7 +185,7 @@ private extension String {
 }
 
 private extension Keyboard.KeyboardType {
-    
+
     var shouldSwitchToPreferredKeyboardType: Bool {
         switch self {
         case .alphabetic(let state): state.shouldSwitchToPreferredKeyboardType
@@ -195,7 +195,7 @@ private extension Keyboard.KeyboardType {
 }
 
 private extension Keyboard.Case {
-    
+
     var shouldSwitchToPreferredKeyboardType: Bool {
         switch self {
         case .auto: true

@@ -13,7 +13,7 @@ import UIKit
 #endif
 
 public extension URL {
-    
+
     /// This URL will deep link to the app's custom settings
     /// in System Settings.
     ///
